@@ -1,0 +1,40 @@
+
+class Recursividad:
+
+    def __sumar_digitos(self, numero):
+        """Método que devuelve la suma de los digitos del número"""
+        sumad = 0
+        for i in str(numero):
+            sumad += int(i)
+        return sumad
+
+    def sumar_digitos(self, numeros, mayor=0):
+        """
+        Este metodo se encarga de recibir una lista de números, junto a un parametro en 0 llamado "mayor"
+        el cual se encargará de almacenar el número más grande.
+        """
+
+        # Caso base, cuando la lista de números esta vacía que devuelve el número mayor
+        if len(numeros) == 0:
+            return mayor
+
+        # Variable que almacena la suma de dígitos del primer número de la lista
+        m1 = self.__sumar_digitos(numeros[0])
+
+        # Casos Recursivos
+        if m1 > self.__sumar_digitos(mayor):  # Cuando la suma de digitos del número es mayor que la anterior
+            return self.sumar_digitos(numeros[1:], numeros[0])
+
+        else:  # Para cuando la suma de digitos del número es menor al que la anterior
+            return self.sumar_digitos(numeros[1:], mayor)
+
+
+if __name__ == "__main__":
+    # Ingreso de los datos
+    numeros = input("ingresa la secuencia de números separadas por una coma(,): \n").split(',')
+
+    # Se crea la instancia para acceder al metodo de solucion
+    prueba = Recursividad()
+    
+    # Se imprime el número con la suma de digitos más grande
+    print("El número con la suma de dígitos más grande es: ", prueba.sumar_digitos(numeros))
